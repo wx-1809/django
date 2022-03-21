@@ -11,4 +11,4 @@ def welcome(request):
 
 def index(request):
 
-    return render(request,'/index.html',{'form':list})
+    return render(request,'myDjango/index.html',{'form':list})
