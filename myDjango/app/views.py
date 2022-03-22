@@ -11,4 +11,9 @@ def welcome(request):
 
 def index(request):
 
+    name = request.POST.get('name',None)
+    password = request.POST.get('password',None)
+    data = {'name':name, 'password':password}
+    list.append(data)
+
     return render(request,'myDjango/index.html',{'form':list})
