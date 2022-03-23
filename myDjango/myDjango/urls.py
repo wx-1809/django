@@ -24,6 +24,7 @@ urlpatterns = [
     path('welcome/', views.welcome),
     path('admin/', admin.site.urls),
     path('index/',views.index),
+    path('save_data/',views.save_data),
     #url(r'^index/',app_views.index),
     #url(r'^index/',views.index),
 ]

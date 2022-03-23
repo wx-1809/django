@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库操作</title>
+</head>
+<body>
+<form action="/save_data/" method="post">
+    {% csrf_token %}
+    <ul>
+        <li>
+            请输入名字<input type="text" name="add_data">
+            <button type="submit" name="add">添加数据</button>
+        </li>
+        <li>
+            请输入 ID<input type="text" name="update_data">
+            <button type="submit" name="update">更新数据</button>
+        </li>
+        <li>
+            请输入 ID<input type="text" name="delete_data">
+            <button type="submit" name="delete">删除数据</button>
+        </li>
+        <li>
+            请输入 ID<input type="text" name="select_data">
+            <button type="submit" name="selete">查询数据</button>
+        </li>
+    </ul>
+
+</form>
+    <p>{{ result }}</p>
+</body>
+</html>
