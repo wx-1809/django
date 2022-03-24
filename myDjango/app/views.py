@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.views.decorators import csrf
 from app.models import Test
+from app import models
 
 list = [{"name":'good','password':'python'},{'name':'learning','password':'django'}]
 
@@ -18,7 +19,7 @@ def index(request):
     data = {'name':name, 'password':password}
     list.append(data)
 
-    return render(request,'myDjango/index.html',{'form':list})
+    return render(request,'index.html',{'form':list})
 
 def save_data(request):
     data={}
@@ -43,4 +44,25 @@ def save_data(request):
             test1=Test.objects.get(id=ID)
             data['result']=test1.name
 
-    return render(request, 'myDjango/save_data.html',data)
+    return render(request, 'save_data.html',data)
+
+def db_handle(request):
+    """add number"""
+    # models.UserInfo.objects.create(username='andy',password='123456', age=33)
+    # dic = {"username":"christ","password":"123456","age":33}
+    # models.UserInfo.objects.create(**dic)
+    """#delete datanumber;"""
+    # models.UserInfo.objects.filter(id=2).delete()
+    """"update database;"""
+    # models.UserInfo.objects.filter(id=1).update(age=18)
+
+    # return HttpResponse('OK')
+
+    """use html deal with databases:use file select data"""
+    if request.method == "POST":
+        models.UserInfo.objects.create(username=request.POST['username'],password=request.POST['password'],age=request.POST['age'])
+
+    user_list_obj = models.UserInfo.objects.all()
+
+    # return  render(request,'databases_deal.html',{'li':user_list_obj})
+    return render(request, 'static_css.html', {'li': user_list_obj})

@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',views.index),
     path('save_data/',views.save_data),
+    path('db_handle/',views.db_handle),
     #url(r'^index/',app_views.index),
     #url(r'^index/',views.index),
 ]
