@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.template.defaulttags import url
-from django.urls import path
+from django.urls import path, include
 #from django.conf.urls import url
 from app import views
 
@@ -26,7 +26,7 @@ urlpatterns = [
     path('index/',views.index),
     path('save_data/',views.save_data),
     path('db_handle/',views.db_handle),
-    path('csdnFri/',views.csdnFri),
-    #url(r'^index/',app_views.index),
+    # path('csdnFri/',views.csdnFri),
+    url(r'^csdnFri/',include('app.urls')),
     #url(r'^index/',views.index),
 ]

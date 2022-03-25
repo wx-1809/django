@@ -68,5 +68,7 @@ def db_handle(request):
     return render(request, 'static_css.html', {'li': user_list_obj})
 
 def csdnFri(request):
-    data = models.Fri.objects.all()
-    return render(request,'csdnFri.html',locals())
+    data = {}
+    list = models.Fri.objects.all()  #sql查询所有
+    data['list']=list
+    return render(request,'csdnFri.html',data) #页面跳转
