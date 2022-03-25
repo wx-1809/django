@@ -66,3 +66,7 @@ def db_handle(request):
 
     # return  render(request,'databases_deal.html',{'li':user_list_obj})
     return render(request, 'static_css.html', {'li': user_list_obj})
+
+def csdnFri(request):
+    data = models.Fri.objects.all()
+    return render(request,'csdnFri.html',locals())

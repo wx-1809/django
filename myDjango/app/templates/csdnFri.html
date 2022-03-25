@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django数据内容跳转</title>
+    <link type="text/css" href="/static/base.css" rel="external nofollow" rel="stylesheet"/>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>年龄</th>
+        </tr>
+        {% for item in li %}
+        <tr>
+            <td>{{ item.username }}</td>
+            <td>{{ item.password }}</td>
+            <td>{{ item.age }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/db_handle/" method="post">
+        <p>用户名：<input name="username"/></p>
+        <p>密码：<input name="password"/></p>
+        <p>年龄：<input name="age"/></p>
+        <p><input type="submit" value="submit"/></p>
+    </form>
+</body>
+</html>
