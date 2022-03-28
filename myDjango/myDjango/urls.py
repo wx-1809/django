@@ -13,12 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
-from django.template.defaulttags import url
+from django.shortcuts import render
 from django.urls import path, include
-#from django.conf.urls import url
 from app import views
 
+
+def wel_ind(req):
+    return render(req, 'templates/wel_ind.html')
 
 urlpatterns = [
     path('welcome/', views.welcome),
@@ -26,7 +29,7 @@ urlpatterns = [
     path('index/',views.index),
     path('save_data/',views.save_data),
     path('db_handle/',views.db_handle),
-    # path('csdnFri/',views.csdnFri),
-    url(r'^csdnFri/',include('app.urls')),
-    #url(r'^index/',views.index),
+    path('wel_ind/',wel_ind),
+    path('app/',include('app.urls')),
+    # url(r'^app/',include('app.urls')),
 ]

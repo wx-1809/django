@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.shortcuts import HttpResponse
@@ -44,7 +44,7 @@ def save_data(request):
             test1=Test.objects.get(id=ID)
             data['result']=test1.name
 
-    return render(request, 'save_data.html',data)
+    return render(request, 'templates/save_data.html',data)
 
 def db_handle(request):
     """add number"""
@@ -65,10 +65,45 @@ def db_handle(request):
     user_list_obj = models.UserInfo.objects.all()
 
     # return  render(request,'databases_deal.html',{'li':user_list_obj})
-    return render(request, 'static_css.html', {'li': user_list_obj})
+    return render(request, 'templates/static_css.html', {'li': user_list_obj})
 
-def csdnFri(request):
+# def wel_ind(req):
+#
+#     return render(req, 'wel_ind.html')
+
+def list(req):#表格信息
     data = {}
-    list = models.Fri.objects.all()  #sql查询所有
-    data['list']=list
-    return render(request,'csdnFri.html',data) #页面跳转
+    list = models.Artical.objects.all()
+    data['list'] = list
+    return render(req, 'templates/blog/list.html', data)
+
+def toAdd(req):
+    return render(req,'templates/blog/add.html')
+
+def add(req):
+    title = req.POST.get('title')
+    content = req.POST.get('content')
+    author = req.POST.get('author')
+    article = models.Artical(title=title,content=content,author=author)
+    article.save()
+    return redirect('../list')
+
+def toEdit(req):
+    id = req.GET.get("id")
+    article = models.Artical.objects.get(id=id)
+    data = {}
+    data['data'] = article
+
+    return  render(req,'templates/blog/edit.html', data)
+
+def edit(req):
+    id = req.POST.get("id")
+    title = req.POST.get('title')
+    content = req.POST.get('content')
+    author = req.POST.get('author')
+
+    res = models.Artical.objects.filter(id=id).update(title=title,content=content,author=author)
+
+    print("更新结果：{0}".format(res))
+
+    return render('../list')
