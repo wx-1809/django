@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+  {% for i in img %}
+  <img src="{{MEDIA_URL}}{{i.img}}">
+  {% endfor %}
+</body>
+</html>

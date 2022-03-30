@@ -14,22 +14,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import path, include
 from app import views
+from django.conf import settings
 
 
 def wel_ind(req):
     return render(req, 'templates/wel_ind.html')
 
 urlpatterns = [
-    path('welcome/', views.welcome),
+    # path('welcome/', views.welcome),
+    # path('wel_ind/',wel_ind),
     path('admin/', admin.site.urls),
-    path('index/',views.index),
-    path('save_data/',views.save_data),
-    path('db_handle/',views.db_handle),
-    path('wel_ind/',wel_ind),
-    path('app/',include('app.urls')),
+    # path('index/',views.index),
+    # path('save_data/',views.save_data),
+    # path('db_handle/',views.db_handle),
+    #
+    # path('app/',include('app.urls')),
+    # path('wel_ind/',wel_ind),
+    # path('templates/',include('app.urls'))
     # url(r'^app/',include('app.urls')),
-]
+    #IMG file trans
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

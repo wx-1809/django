@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.shortcuts import HttpResponse
 from django.views.decorators import csrf
-from app.models import Test
+# from app.models import Test
 from app import models
 
 list = [{"name":'good','password':'python'},{'name':'learning','password':'django'}]
@@ -19,32 +19,32 @@ def index(request):
     data = {'name':name, 'password':password}
     list.append(data)
 
-    return render(request,'index.html',{'form':list})
+    return render(request,'/index.html',{'form':list})
 
 def save_data(request):
     data={}
     if request.POST:
         if 'add' in request.POST:
-            test1 = Test(name=request.POST['add_data'])
+            test1 = models.Test(name=request.POST['add_data'])
             test1.save()
             data['result']='数据添加成功'
         if 'update' in request.POST:
             ID  = int(request.POST['update_data'])
-            test1 = Test.objects.get(id=ID)
+            test1 = models.Test.objects.get(id=ID)
             test1.name='change'
             test1.save()
             data['result']='数据修改成功'
         if 'delete' in request.POST:
             ID = int(request.POST['delete_data'])
-            test1=Test.objects.get(id=ID)
+            test1=models.Test.objects.get(id=ID)
             test1.delete()
             data['result']='删除数据成功'
         if 'selete' in request.POST:
             ID = int(request.POST['select_data'])
-            test1=Test.objects.get(id=ID)
+            test1=models.Test.objects.get(id=ID)
             data['result']=test1.name
 
-    return render(request, 'templates/save_data.html',data)
+    return render(request, '/save_data.html',data)
 
 def db_handle(request):
     """add number"""
@@ -67,18 +67,18 @@ def db_handle(request):
     # return  render(request,'databases_deal.html',{'li':user_list_obj})
     return render(request, 'templates/static_css.html', {'li': user_list_obj})
 
-# def wel_ind(req):
-#
-#     return render(req, 'wel_ind.html')
+def wel_ind(req):
+
+    return render(req, 'templates/wel_ind.html')
 
 def list(req):#表格信息
     data = {}
     list = models.Artical.objects.all()
     data['list'] = list
-    return render(req, 'templates/blog/list.html', data)
+    return render(req, 'templates/app/list.html', data)
 
 def toAdd(req):
-    return render(req,'templates/blog/add.html')
+    return render(req,'app/add.html')
 
 def add(req):
     title = req.POST.get('title')
@@ -94,7 +94,7 @@ def toEdit(req):
     data = {}
     data['data'] = article
 
-    return  render(req,'templates/blog/edit.html', data)
+    return  render(req,'app/edit.html', data)
 
 def edit(req):
     id = req.POST.get("id")
@@ -106,4 +106,9 @@ def edit(req):
 
     print("更新结果：{0}".format(res))
 
-    return render('../list')
+    return redirect('../list')
+
+def hello(request):
+    models.IMG.objects.filter(name='bg')
+    img = models.IMG.objects.all()
+    return render(request,'templates/welcome.html',{'img':img})

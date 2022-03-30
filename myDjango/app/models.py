@@ -26,3 +26,29 @@ class Comment(models.Model):
     content = models.CharField(max_length=100,verbose_name='评论内容')
     time = models.DateTimeField(auto_now=True, verbose_name='时间')
 
+class Person(models.Model):
+    name = models.CharField(max_length=30)
+    age = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class IMG(models.Model):
+    img = models.ImageField(upload_to='img')
+    name = models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
