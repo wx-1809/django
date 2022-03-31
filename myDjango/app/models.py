@@ -39,6 +39,13 @@ class IMG(models.Model):
     def __str__(self):
         return self.name
 
+#create databases
+class User(models.Model):
+    name = models.CharField(max_length=50)
+    heading = models.FileField(upload_to="img/")
+
+    def __str__(self):
+        return self.name
 
 
 

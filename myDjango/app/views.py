@@ -5,6 +5,7 @@ from django.shortcuts import HttpResponse
 from django.views.decorators import csrf
 # from app.models import Test
 from app import models
+from .forms import AddForm
 
 list = [{"name":'good','password':'python'},{'name':'learning','password':'django'}]
 
@@ -112,3 +113,42 @@ def hello(request):
     models.IMG.objects.filter(name='bg')
     img = models.IMG.objects.all()
     return render(request,'templates/welcome.html',{'img':img})
+
+def add(request):
+    if request.method == "POST":
+        af = AddForm(request.POST, request.FILES)
+        if af.is_valid():
+            name = af.cleaned_data['name']
+            heading = af.cleaned_data['heading']
+            user = models.User(name=name, heading=heading)
+            user.save()
+            return render(request, 'templates/users/index.html', context={"user": user})
+        else:
+            af = AddForm()
+            return render(request, 'templates/users/add.html', context={"af": af})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

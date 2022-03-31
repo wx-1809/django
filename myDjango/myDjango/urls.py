@@ -22,8 +22,8 @@ from app import views
 from django.conf import settings
 
 
-def wel_ind(req):
-    return render(req, 'templates/wel_ind.html')
+# def wel_ind(req):
+#     return render(req, 'templates/wel_ind.html')
 
 urlpatterns = [
     # path('welcome/', views.welcome),
@@ -38,4 +38,5 @@ urlpatterns = [
     # path('templates/',include('app.urls'))
     # url(r'^app/',include('app.urls')),
     #IMG file trans
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    path('app/', include('app.urls'))
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
